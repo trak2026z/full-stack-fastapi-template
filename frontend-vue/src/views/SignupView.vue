@@ -2,7 +2,7 @@
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
 import { useMutation } from '@tanstack/vue-query'
-import { UsersService, TokenResponse } from '@/client'
+import { UsersService, type UserPublic } from '@/client'
 import { handleApiError } from '@/services/api'
 
 const router = useRouter()
@@ -12,19 +12,18 @@ const email = ref('')
 const password = ref('')
 const confirmPassword = ref('')
 
-const signupMutation = useMutation<TokenResponse, unknown, { email: string; password: string; full_name: string }>({
+const signupMutation = useMutation<UserPublic, unknown, { email: string; password: string; full_name: string }>({
   mutationFn: ({ email, password, full_name }) =>
-    UsersService.createUser({
+    UsersService.registerUser({
       requestBody: {
         email,
         password,
         full_name,
       },
     }),
-  onSuccess: (data) => {
-    // zapis tokena
-    localStorage.setItem('access_token', data.access_token)
-    router.push('/')
+  onSuccess: () => {
+    alert('Account created successfully! Please log in.')
+    router.push('/login')
   },
   onError: handleApiError,
 })
@@ -55,68 +54,50 @@ function onSubmit() {
       <!-- Form -->
       <form @submit.prevent="onSubmit" class="space-y-4">
         <div>
-          <label for="fullName" class="block text-sm font-medium text-gray-700">Full Name</label>
-          <input
-            v-model="fullName"
-            type="text"
-            id="fullName"
-            required
-            class="mt-1 block w-full rounded-md border border-gray-300 p-2 focus:border-green-500 focus:ring-green-500"
-            placeholder="John Doe"
-          />
+          <label class="block text-sm font-medium text-gray-700">Full Name</label>
+          <input v-model="fullName" type="text" required class="mt-1 block w-full border rounded-md p-2" />
         </div>
 
         <div>
-          <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
-          <input
-            v-model="email"
-            type="email"
-            id="email"
-            required
-            class="mt-1 block w-full rounded-md border border-gray-300 p-2 focus:border-green-500 focus:ring-green-500"
-            placeholder="you@example.com"
-          />
+          <label class="block text-sm font-medium text-gray-700">Email</label>
+          <input v-model="email" type="email" required class="mt-1 block w-full border rounded-md p-2" />
         </div>
 
         <div>
-          <label for="password" class="block text-sm font-medium text-gray-700">Password</label>
-          <input
-            v-model="password"
-            type="password"
-            id="password"
-            required
-            class="mt-1 block w-full rounded-md border border-gray-300 p-2 focus:border-green-500 focus:ring-green-500"
-            placeholder="••••••••"
-          />
+          <label class="block text-sm font-medium text-gray-700">Password</label>
+          <input v-model="password" type="password" required class="mt-1 block w-full border rounded-md p-2" />
         </div>
 
         <div>
-          <label for="confirmPassword" class="block text-sm font-medium text-gray-700">Confirm Password</label>
-          <input
-            v-model="confirmPassword"
-            type="password"
-            id="confirmPassword"
-            required
-            class="mt-1 block w-full rounded-md border border-gray-300 p-2 focus:border-green-500 focus:ring-green-500"
-            placeholder="••••••••"
-          />
+          <label class="block text-sm font-medium text-gray-700">Confirm Password</label>
+          <input v-model="confirmPassword" type="password" required class="mt-1 block w-full border rounded-md p-2" />
         </div>
 
-        <!-- Error message -->
-        <p v-if="signupMutation.error" class="text-red-600 text-sm">Signup failed. Please try again.</p>
+        <!-- Password mismatch -->
+        <p v-if="password !== confirmPassword && confirmPassword" class="text-red-600 text-sm">
+          Passwords do not match
+        </p>
 
-        <!-- Submit button -->
+        <!-- Error API -->
+        <p v-if="signupMutation.isError" class="text-red-600 text-sm">Signup failed. Please try again.</p>
+
+        <!-- Submit -->
         <button
           type="submit"
           class="w-full bg-green-600 text-white py-2 px-4 rounded-md hover:bg-green-700 disabled:opacity-50"
-          :disabled="signupMutation.isPending"
+          :disabled="
+            signupMutation.isLoading ||
+            !fullName ||
+            !email ||
+            !password ||
+            password !== confirmPassword
+          "
         >
-          <span v-if="signupMutation.isPending">Signing up...</span>
+          <span v-if="signupMutation.isLoading">Signing up...</span>
           <span v-else>Sign Up</span>
         </button>
       </form>
 
-      <!-- Login link -->
       <p class="mt-6 text-center text-sm text-gray-600">
         Already have an account?
         <router-link to="/login" class="text-green-600 hover:underline">Log In</router-link>

@@ -1,16 +1,16 @@
 import { useMutation } from '@tanstack/vue-query'
-import { AuthService, TokenResponse } from '@/client'
-import { handleApiError } from '@/service/api'
+import { LoginService, type Token } from '@/client'
+import { handleApiError } from '@/services/api'
 
 /**
  * Composable obsługujący logowanie użytkownika.
  * Odpowiada hookowi useAuth z wersji React.
  */
 export function useLogin() {
-  return useMutation<TokenResponse, unknown, { username: string; password: string }>({
+  return useMutation<Token, unknown, { username: string; password: string }>({
     mutationFn: ({ username, password }) =>
-      AuthService.login({
-        requestBody: {
+      LoginService.loginAccessToken({
+        formData: {
           username,
           password,
         },
