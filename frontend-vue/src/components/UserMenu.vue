@@ -3,14 +3,14 @@ import { ref } from 'vue'
 import { useRouter } from 'vue-router'
 import { useCurrentUser } from '@/composables/useCurrentUser'
 
+import { useAuth } from '@/composables/useAuth'
+const { logout } = useAuth()
+
 const { data: user, error, isLoading } = useCurrentUser()
 const router = useRouter()
 const open = ref(false)
 
-function logout() {
-  localStorage.removeItem('access_token')
-  router.push('/login')
-}
+
 </script>
 
 <template>

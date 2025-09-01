@@ -1,10 +1,11 @@
 <script setup lang="ts">
 import { RouterView, useRoute } from 'vue-router'
 import UserMenu from '@/components/UserMenu.vue'
+import Sidebar from '@/components/Sidebar.vue'
 
 const route = useRoute()
 
-// Ścieżki bez nagłówka (auth layout)
+// Ścieżki bez sidebaru i headera (auth layout)
 const authRoutes = ['/login', '/signup', '/recover-password', '/reset-password']
 
 function isAuthPage() {
@@ -17,23 +18,25 @@ function isLoggedIn() {
 </script>
 
 <template>
-  <div class="min-h-screen flex flex-col">
-    <!-- Górny pasek tylko dla zalogowanych -->
-    <header
-      v-if="!isAuthPage() && isLoggedIn()"
-      class="flex justify-between items-center bg-gray-100 p-4 shadow"
-    >
-      <h1 class="text-xl font-bold text-green-600">FastAPI</h1>
-      <UserMenu />
-    </header>
+  <div class="min-h-screen flex">
+    <!-- Sidebar tylko gdy zalogowany i nie na auth routes -->
+    <Sidebar v-if="!isAuthPage() && isLoggedIn()" />
 
-    <!-- Główna zawartość -->
-    <main class="flex-1 p-4">
-      <RouterView />
-    </main>
+    <!-- Prawa część strony -->
+    <div class="flex-1 flex flex-col">
+      <!-- Header -->
+      <header
+        v-if="!isAuthPage() && isLoggedIn()"
+        class="flex justify-between items-center bg-gray-100 p-4 shadow"
+      >
+        <h1 class="text-xl font-bold text-green-600">FastAPI</h1>
+        <UserMenu />
+      </header>
+
+      <!-- Główna zawartość -->
+      <main class="flex-1 p-4 overflow-y-auto">
+        <RouterView />
+      </main>
+    </div>
   </div>
 </template>
-
-<style scoped>
-/* Style globalne możesz dodać tutaj */
-</style>

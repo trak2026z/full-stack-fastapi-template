@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import TheWelcome from '../components/TheWelcome.vue'
 </script>
 
 <template>
-  <main>
-    <TheWelcome />
+  <main class="p-4">
+    <h1 class="text-xl font-bold">Dashboard</h1>
+    <p>Welcome to the FastAPI + Vue app 🚀</p>
   </main>
 </template>

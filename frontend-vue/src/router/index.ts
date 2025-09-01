@@ -15,6 +15,19 @@ const routes: RouteRecordRaw[] = [
     meta: { requiresAuth: true },
   },
   {
+    path: '/items',
+    name: 'items',
+    component: () => import('../views/ItemsView.vue'),
+    meta: { requiresAuth: true },
+  },
+  
+  {
+    path: '/admin',
+    name: 'admin',
+    component: () => import('../views/AdminView.vue'),
+    meta: { requiresAuth: true },
+  },
+  {
     path: '/about',
     name: 'about',
     component: AboutView,
@@ -41,11 +54,11 @@ const routes: RouteRecordRaw[] = [
     component: () => import('../views/ResetPasswordView.vue'),
   },
   {
-  path: '/profile',
-  name: 'profile',
-  component: () => import('../views/ProfileView.vue'),
-  meta: { requiresAuth: true },
-},
+    path: '/profile',
+    name: 'profile',
+    component: () => import('../views/ProfileView.vue'),
+    meta: { requiresAuth: true },
+  },
 ]
 
 const router = createRouter({
