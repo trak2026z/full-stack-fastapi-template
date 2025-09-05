@@ -17,9 +17,13 @@ function applyTheme(value: Theme) {
 }
 
 // reagowanie na zmianę
-watch(theme, (newValue) => {
-  applyTheme(newValue)
-}, { immediate: true })
+watch(
+  theme,
+  (newValue) => {
+    applyTheme(newValue)
+  },
+  { immediate: true },
+)
 </script>
 
 <template>

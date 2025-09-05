@@ -20,7 +20,7 @@ const routes: RouteRecordRaw[] = [
     component: () => import('../views/ItemsView.vue'),
     meta: { requiresAuth: true },
   },
-  
+
   {
     path: '/admin',
     name: 'admin',

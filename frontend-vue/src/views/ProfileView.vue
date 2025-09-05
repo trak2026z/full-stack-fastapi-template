@@ -6,7 +6,6 @@ import { UsersService, type UserUpdate, type UserPublic } from '@/client'
 
 import AppearanceView from '@/views/AppearanceView.vue'
 
-
 const { data: user, isLoading, error } = useCurrentUser()
 const activeTab = ref<'profile' | 'password' | 'appearance' | 'danger'>('profile')
 
@@ -36,8 +35,7 @@ const updatePassword = useMutation<
   unknown,
   { current_password: string; new_password: string }
 >({
-  mutationFn: (data) =>
-    UsersService.updatePasswordMe({ requestBody: data }),
+  mutationFn: (data) => UsersService.updatePasswordMe({ requestBody: data }),
   onSuccess: () => {
     passwordForm.value = {
       current_password: '',
@@ -63,14 +61,12 @@ const deleteAccount = useMutation({
   },
 })
 function onDeleteAccount() {
-  if (window.confirm('Are you sure you want to delete your account? This action cannot be undone.')) {
+  if (
+    window.confirm('Are you sure you want to delete your account? This action cannot be undone.')
+  ) {
     deleteAccount.mutate()
   }
 }
-
-
-
-
 </script>
 
 <template>
@@ -79,24 +75,34 @@ function onDeleteAccount() {
 
     <!-- Tabs -->
     <div class="flex space-x-4 border-b mb-6">
-      <button class="px-4 py-2 -mb-px border-b-2"
+      <button
+        class="px-4 py-2 -mb-px border-b-2"
         :class="activeTab === 'profile' ? 'border-green-600 font-semibold' : 'border-transparent'"
-        @click="activeTab = 'profile'">
+        @click="activeTab = 'profile'"
+      >
         My profile
       </button>
-      <button class="px-4 py-2 -mb-px border-b-2"
+      <button
+        class="px-4 py-2 -mb-px border-b-2"
         :class="activeTab === 'password' ? 'border-green-600 font-semibold' : 'border-transparent'"
-        @click="activeTab = 'password'">
+        @click="activeTab = 'password'"
+      >
         Password
       </button>
-      <button class="px-4 py-2 -mb-px border-b-2"
-        :class="activeTab === 'appearance' ? 'border-green-600 font-semibold' : 'border-transparent'"
-        @click="activeTab = 'appearance'">
+      <button
+        class="px-4 py-2 -mb-px border-b-2"
+        :class="
+          activeTab === 'appearance' ? 'border-green-600 font-semibold' : 'border-transparent'
+        "
+        @click="activeTab = 'appearance'"
+      >
         Appearance
       </button>
-      <button class="px-4 py-2 -mb-px border-b-2 text-red-600"
+      <button
+        class="px-4 py-2 -mb-px border-b-2 text-red-600"
         :class="activeTab === 'danger' ? 'border-red-600 font-semibold' : 'border-transparent'"
-        @click="activeTab = 'danger'">
+        @click="activeTab = 'danger'"
+      >
         Danger zone
       </button>
     </div>
@@ -112,11 +118,16 @@ function onDeleteAccount() {
         <div v-if="!editing">
           <p><strong>Full name:</strong> {{ user?.full_name }}</p>
           <p><strong>Email:</strong> {{ user?.email }}</p>
-          <button class="mt-4 px-4 py-2 bg-green-600 text-white rounded-md" @click="() => {
-              form.full_name = user?.full_name || ''
-              form.email = user?.email || ''
-              editing = true
-            }">
+          <button
+            class="mt-4 px-4 py-2 bg-green-600 text-white rounded-md"
+            @click="
+              () => {
+                form.full_name = user?.full_name || ''
+                form.email = user?.email || ''
+                editing = true
+              }
+            "
+          >
             Edit
           </button>
         </div>
@@ -124,16 +135,27 @@ function onDeleteAccount() {
         <div v-else>
           <label class="block mb-2">
             Full name
-            <input v-model="form.full_name" type="text" class="mt-1 block w-full border rounded-md p-2" />
+            <input
+              v-model="form.full_name"
+              type="text"
+              class="mt-1 block w-full border rounded-md p-2"
+            />
           </label>
           <label class="block mb-2">
             Email
-            <input v-model="form.email" type="email" class="mt-1 block w-full border rounded-md p-2" />
+            <input
+              v-model="form.email"
+              type="email"
+              class="mt-1 block w-full border rounded-md p-2"
+            />
           </label>
 
           <div class="flex space-x-2 mt-4">
-            <button class="px-4 py-2 bg-green-600 text-white rounded-md" :disabled="updateUser.isLoading"
-              @click="updateUser.mutate({ full_name: form.full_name, email: form.email })">
+            <button
+              class="px-4 py-2 bg-green-600 text-white rounded-md"
+              :disabled="updateUser.isLoading"
+              @click="updateUser.mutate({ full_name: form.full_name, email: form.email })"
+            >
               Save
             </button>
 
@@ -150,42 +172,65 @@ function onDeleteAccount() {
 
         <label class="block mb-2">
           Current password
-          <input v-model="passwordForm.current_password" type="password"
-            class="mt-1 block w-full border rounded-md p-2" />
+          <input
+            v-model="passwordForm.current_password"
+            type="password"
+            class="mt-1 block w-full border rounded-md p-2"
+          />
         </label>
 
         <label class="block mb-2">
           New password
-          <input v-model="passwordForm.new_password" type="password" class="mt-1 block w-full border rounded-md p-2" />
+          <input
+            v-model="passwordForm.new_password"
+            type="password"
+            class="mt-1 block w-full border rounded-md p-2"
+          />
         </label>
 
         <label class="block mb-2">
           Confirm new password
-          <input v-model="passwordForm.confirm_password" type="password"
-            class="mt-1 block w-full border rounded-md p-2" />
+          <input
+            v-model="passwordForm.confirm_password"
+            type="password"
+            class="mt-1 block w-full border rounded-md p-2"
+          />
         </label>
 
         <div class="flex space-x-2 mt-4">
-          <button class="px-4 py-2 bg-green-600 text-white rounded-md"
-            :disabled="updatePassword.isLoading || passwordForm.new_password !== passwordForm.confirm_password" @click="updatePassword.mutate({
-              current_password: passwordForm.current_password,
-              new_password: passwordForm.new_password
-            })">
+          <button
+            class="px-4 py-2 bg-green-600 text-white rounded-md"
+            :disabled="
+              updatePassword.isLoading ||
+              passwordForm.new_password !== passwordForm.confirm_password
+            "
+            @click="
+              updatePassword.mutate({
+                current_password: passwordForm.current_password,
+                new_password: passwordForm.new_password,
+              })
+            "
+          >
             Save
           </button>
-          <button class="px-4 py-2 bg-gray-300 rounded-md"
-            @click="passwordForm = { current_password: '', new_password: '', confirm_password: '' }">
+          <button
+            class="px-4 py-2 bg-gray-300 rounded-md"
+            @click="passwordForm = { current_password: '', new_password: '', confirm_password: '' }"
+          >
             Cancel
           </button>
         </div>
 
-        <p v-if="passwordForm.new_password !== passwordForm.confirm_password && passwordForm.confirm_password"
-          class="text-red-600 mt-2">
+        <p
+          v-if="
+            passwordForm.new_password !== passwordForm.confirm_password &&
+            passwordForm.confirm_password
+          "
+          class="text-red-600 mt-2"
+        >
           Passwords do not match
         </p>
       </div>
-
-
 
       <!-- Appearance -->
       <!-- Appearance -->
@@ -193,19 +238,19 @@ function onDeleteAccount() {
         <AppearanceView />
       </div>
 
-
       <!-- Danger zone -->
       <div v-else-if="activeTab === 'danger'">
         <h2 class="font-semibold mb-2 text-red-600">Danger Zone</h2>
         <p class="text-gray-600 mb-4">
           Permanently delete your data and everything associated with your account.
         </p>
-        <button class="px-4 py-2 bg-red-600 text-white rounded-md" :disabled="deleteAccount.isLoading"
-          @click="onDeleteAccount">
+        <button
+          class="px-4 py-2 bg-red-600 text-white rounded-md"
+          :disabled="deleteAccount.isLoading"
+          @click="onDeleteAccount"
+        >
           Delete
         </button>
-
-
       </div>
     </div>
   </div>

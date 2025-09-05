@@ -127,7 +127,11 @@ function handleDelete() {
     <div v-if="showAdd" class="fixed inset-0 flex items-center justify-center bg-black/50">
       <div class="bg-white p-6 rounded w-96">
         <h2 class="text-lg font-semibold mb-4">Add Item</h2>
-        <input v-model="form.title" placeholder="Title" class="w-full mb-2 border rounded px-2 py-1" />
+        <input
+          v-model="form.title"
+          placeholder="Title"
+          class="w-full mb-2 border rounded px-2 py-1"
+        />
         <input
           v-model="form.description"
           placeholder="Description"
@@ -144,7 +148,11 @@ function handleDelete() {
     <div v-if="showEdit.visible" class="fixed inset-0 flex items-center justify-center bg-black/50">
       <div class="bg-white p-6 rounded w-96">
         <h2 class="text-lg font-semibold mb-4">Edit Item</h2>
-        <input v-model="form.title" placeholder="Title" class="w-full mb-2 border rounded px-2 py-1" />
+        <input
+          v-model="form.title"
+          placeholder="Title"
+          class="w-full mb-2 border rounded px-2 py-1"
+        />
         <input
           v-model="form.description"
           placeholder="Description"
@@ -157,13 +165,18 @@ function handleDelete() {
           >
             Cancel
           </button>
-          <button class="px-4 py-2 bg-blue-600 text-white rounded" @click="handleEdit">Update</button>
+          <button class="px-4 py-2 bg-blue-600 text-white rounded" @click="handleEdit">
+            Update
+          </button>
         </div>
       </div>
     </div>
 
     <!-- Delete modal -->
-    <div v-if="showDelete.visible" class="fixed inset-0 flex items-center justify-center bg-black/50">
+    <div
+      v-if="showDelete.visible"
+      class="fixed inset-0 flex items-center justify-center bg-black/50"
+    >
       <div class="bg-white p-6 rounded w-96">
         <h2 class="text-lg font-semibold mb-4">Delete Item</h2>
         <p>Are you sure you want to delete "{{ showDelete.item?.title }}"?</p>
@@ -174,7 +187,9 @@ function handleDelete() {
           >
             Cancel
           </button>
-          <button class="px-4 py-2 bg-red-600 text-white rounded" @click="handleDelete">Delete</button>
+          <button class="px-4 py-2 bg-red-600 text-white rounded" @click="handleDelete">
+            Delete
+          </button>
         </div>
       </div>
     </div>

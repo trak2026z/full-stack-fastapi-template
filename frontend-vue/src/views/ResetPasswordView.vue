@@ -61,7 +61,9 @@ function onSubmit() {
       <!-- Form -->
       <form @submit.prevent="onSubmit" class="space-y-4">
         <div>
-          <label for="newPassword" class="block text-sm font-medium text-gray-700">New Password</label>
+          <label for="newPassword" class="block text-sm font-medium text-gray-700"
+            >New Password</label
+          >
           <input
             v-model="newPassword"
             type="password"
@@ -73,7 +75,9 @@ function onSubmit() {
         </div>
 
         <div>
-          <label for="confirmPassword" class="block text-sm font-medium text-gray-700">Confirm Password</label>
+          <label for="confirmPassword" class="block text-sm font-medium text-gray-700"
+            >Confirm Password</label
+          >
           <input
             v-model="confirmPassword"
             type="password"

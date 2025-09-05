@@ -32,7 +32,7 @@ const items = computed(() => {
         :class="[
           route.path === item.path
             ? 'bg-gray-100 text-gray-900'
-            : 'text-gray-600 hover:bg-gray-50 hover:text-gray-900'
+            : 'text-gray-600 hover:bg-gray-50 hover:text-gray-900',
         ]"
       >
         <span :class="['w-5 h-5', item.icon]" />

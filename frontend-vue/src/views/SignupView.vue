@@ -12,7 +12,11 @@ const email = ref('')
 const password = ref('')
 const confirmPassword = ref('')
 
-const signupMutation = useMutation<UserPublic, unknown, { email: string; password: string; full_name: string }>({
+const signupMutation = useMutation<
+  UserPublic,
+  unknown,
+  { email: string; password: string; full_name: string }
+>({
   mutationFn: ({ email, password, full_name }) =>
     UsersService.registerUser({
       requestBody: {
@@ -55,22 +59,42 @@ function onSubmit() {
       <form @submit.prevent="onSubmit" class="space-y-4">
         <div>
           <label class="block text-sm font-medium text-gray-700">Full Name</label>
-          <input v-model="fullName" type="text" required class="mt-1 block w-full border rounded-md p-2" />
+          <input
+            v-model="fullName"
+            type="text"
+            required
+            class="mt-1 block w-full border rounded-md p-2"
+          />
         </div>
 
         <div>
           <label class="block text-sm font-medium text-gray-700">Email</label>
-          <input v-model="email" type="email" required class="mt-1 block w-full border rounded-md p-2" />
+          <input
+            v-model="email"
+            type="email"
+            required
+            class="mt-1 block w-full border rounded-md p-2"
+          />
         </div>
 
         <div>
           <label class="block text-sm font-medium text-gray-700">Password</label>
-          <input v-model="password" type="password" required class="mt-1 block w-full border rounded-md p-2" />
+          <input
+            v-model="password"
+            type="password"
+            required
+            class="mt-1 block w-full border rounded-md p-2"
+          />
         </div>
 
         <div>
           <label class="block text-sm font-medium text-gray-700">Confirm Password</label>
-          <input v-model="confirmPassword" type="password" required class="mt-1 block w-full border rounded-md p-2" />
+          <input
+            v-model="confirmPassword"
+            type="password"
+            required
+            class="mt-1 block w-full border rounded-md p-2"
+          />
         </div>
 
         <!-- Password mismatch -->
@@ -79,7 +103,9 @@ function onSubmit() {
         </p>
 
         <!-- Error API -->
-        <p v-if="signupMutation.isError" class="text-red-600 text-sm">Signup failed. Please try again.</p>
+        <p v-if="signupMutation.isError" class="text-red-600 text-sm">
+          Signup failed. Please try again.
+        </p>
 
         <!-- Submit -->
         <button

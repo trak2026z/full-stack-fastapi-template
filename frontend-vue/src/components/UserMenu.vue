@@ -9,8 +9,6 @@ const { logout } = useAuth()
 const { data: user, error, isLoading } = useCurrentUser()
 const router = useRouter()
 const open = ref(false)
-
-
 </script>
 
 <template>
@@ -24,10 +22,7 @@ const open = ref(false)
       <span v-else>{{ user?.email }}</span>
     </button>
 
-    <div
-      v-if="open"
-      class="absolute right-0 mt-2 w-40 bg-white rounded-md shadow-lg z-10"
-    >
+    <div v-if="open" class="absolute right-0 mt-2 w-40 bg-white rounded-md shadow-lg z-10">
       <button
         class="w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
         @click="router.push('/profile')"
