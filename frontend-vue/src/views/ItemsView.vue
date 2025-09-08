@@ -16,14 +16,27 @@ const showDelete = ref<{ visible: boolean; item: any | null }>({ visible: false,
 
 const queryClient = useQueryClient()
 
-// Pobranie itemów
+// Paginacja
+const page = ref(1)
+const size = ref(5) // liczba elementów na stronę
+
+// Pobranie itemów (z parametrami paginacji)
 const { data: itemsResponse, isLoading } = useQuery<ItemsReadItemsResponse>({
-  queryKey: ['items'],
-  queryFn: () => ItemsService.readItems(),
+  queryKey: ['items', page, size],
+  queryFn: () =>
+    ItemsService.readItems({
+      limit: size.value,
+      skip: (page.value - 1) * size.value,
+    }),
 })
+
 
 // Zmapowana lista itemów (tylko data[])
 const items = computed(() => itemsResponse.value?.data ?? [])
+
+// Liczba stron
+const total = computed(() => itemsResponse.value?.count ?? 0)
+const totalPages = computed(() => Math.max(1, Math.ceil(total.value / size.value)))
 
 // Mutacje
 const addMutation = useMutation({
@@ -122,6 +135,27 @@ function handleDelete() {
         </tr>
       </tbody>
     </table>
+
+    <!-- Pagination controls -->
+    <div class="flex justify-between items-center mt-4">
+      <button
+        class="px-4 py-2 bg-gray-300 rounded disabled:opacity-50"
+        :disabled="page === 1"
+        @click="page--"
+      >
+        Previous
+      </button>
+
+      <span>Page {{ page }} of {{ totalPages }}</span>
+
+      <button
+        class="px-4 py-2 bg-gray-300 rounded disabled:opacity-50"
+        :disabled="page === totalPages"
+        @click="page++"
+      >
+        Next
+      </button>
+    </div>
 
     <!-- Add modal -->
     <div v-if="showAdd" class="fixed inset-0 flex items-center justify-center bg-black/50">

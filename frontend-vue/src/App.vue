@@ -23,7 +23,7 @@ function isLoggedIn() {
     <Sidebar v-if="!isAuthPage() && isLoggedIn()" />
 
     <!-- Prawa część strony -->
-    <div class="flex-1 flex flex-col">
+    <div class="flex-1 flex flex-col md:ml-64">
       <!-- Header -->
       <header
         v-if="!isAuthPage() && isLoggedIn()"

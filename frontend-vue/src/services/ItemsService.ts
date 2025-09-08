@@ -1,5 +1,6 @@
 import { ItemsService as GeneratedItemsService } from '@/client'
 import type {
+  ItemsReadItemsData,
   ItemsReadItemsResponse,
   ItemsCreateItemData,
   ItemsCreateItemResponse,
@@ -10,8 +11,8 @@ import type {
 } from '@/client'
 
 export class ItemsService {
-  static async readItems(): Promise<ItemsReadItemsResponse> {
-    return GeneratedItemsService.readItems()
+  static async readItems(params?: ItemsReadItemsData): Promise<ItemsReadItemsResponse> {
+    return GeneratedItemsService.readItems(params)
   }
 
   static async createItem(data: ItemsCreateItemData): Promise<ItemsCreateItemResponse> {

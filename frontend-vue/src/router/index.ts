@@ -66,7 +66,7 @@ const router = createRouter({
   routes,
 })
 
-// 🔒 Navigation guard
+// Navigation guard
 router.beforeEach((to, _from, next) => {
   const token = localStorage.getItem('access_token')
   if (to.meta.requiresAuth && !token) {

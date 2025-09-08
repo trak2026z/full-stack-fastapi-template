@@ -1,6 +1,8 @@
 #!/bin/bash
 # Skrypt dodający 10 użytkowników do Full Stack FastAPI Template
 
+#curl -X POST "http://localhost:8000/api/v1/login/access-token" -H "Content-Type: application/x-www-form-urlencoded" -d "username=trak@wp.pl" -d "password=Qwerty%%5"
+
 # <<< Wklej tutaj swój access_token z /api/v1/login/access-token >>>
 TOKEN="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3NTcxNTM0NzgsInN1YiI6IjBmNTBkOWUyLWMyZGQtNDM3My05YjhhLWQ0YTVhMDg0ZThhMiJ9.poZDwlEuwdBuQWkUPLaeQh6HMmN1OPRvSG4sZFe497E"
 
