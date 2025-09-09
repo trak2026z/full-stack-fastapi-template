@@ -19,9 +19,7 @@ function openMenu() {
   <!-- Mobile: przycisk hamburger -->
   <button
     type="button"
-    class="md:hidden fixed left-3 top-3 z-50 inline-flex items-center rounded-md p-2
-           bg-white/90 shadow ring-1 ring-black/10 backdrop-blur
-           focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500"
+    class="md:hidden fixed left-3 top-3 z-50 inline-flex items-center rounded-md p-2 bg-white/90 shadow ring-1 ring-black/10 backdrop-blur focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500"
     aria-label="Open sidebar"
     @click="openMenu"
   >
@@ -58,9 +56,7 @@ function openMenu() {
           <DialogPanel class="relative flex w-full max-w-xs flex-1 flex-col bg-white">
             <!-- Close (X) -->
             <button
-              class="absolute right-3 top-3 inline-flex items-center rounded-md p-2
-                     text-gray-700 hover:bg-gray-100 focus:outline-none focus:ring-2
-                     focus:ring-inset focus:ring-indigo-500"
+              class="absolute right-3 top-3 inline-flex items-center rounded-md p-2 text-gray-700 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500"
               aria-label="Close sidebar"
               @click="close"
             >
@@ -90,7 +86,9 @@ function openMenu() {
   </TransitionRoot>
 
   <!-- Desktop sidebar (stały) -->
-  <div class="hidden md:flex md:w-64 md:flex-col md:fixed md:inset-y-0 md:left-0 bg-gray-50 border-r z-40">
+  <div
+    class="hidden md:flex md:w-64 md:flex-col md:fixed md:inset-y-0 md:left-0 bg-gray-50 border-r z-40"
+  >
     <div class="flex flex-col flex-grow pt-5 overflow-y-auto">
       <SidebarItems />
     </div>

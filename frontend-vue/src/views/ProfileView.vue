@@ -153,7 +153,7 @@ function onDeleteAccount() {
           <div class="flex space-x-2 mt-4">
             <button
               class="px-4 py-2 bg-green-600 text-white rounded-md"
-              :disabled="updateUser.isLoading"
+              :disabled="updateUser.isPending.value"
               @click="updateUser.mutate({ full_name: form.full_name, email: form.email })"
             >
               Save
@@ -201,7 +201,7 @@ function onDeleteAccount() {
           <button
             class="px-4 py-2 bg-green-600 text-white rounded-md"
             :disabled="
-              updatePassword.isLoading ||
+              updatePassword.isPending.value ||
               passwordForm.new_password !== passwordForm.confirm_password
             "
             @click="
@@ -246,7 +246,7 @@ function onDeleteAccount() {
         </p>
         <button
           class="px-4 py-2 bg-red-600 text-white rounded-md"
-          :disabled="deleteAccount.isLoading"
+          :disabled="deleteAccount.isPending.value"
           @click="onDeleteAccount"
         >
           Delete

@@ -7,12 +7,16 @@ import type {
   ItemsCreateItemData,
   ItemsUpdateItemData,
   ItemsDeleteItemData,
+  ItemPublic,
 } from '@/client'
 
 // Stan modali
 const showAdd = ref(false)
-const showEdit = ref<{ visible: boolean; item: any | null }>({ visible: false, item: null })
-const showDelete = ref<{ visible: boolean; item: any | null }>({ visible: false, item: null })
+const showEdit = ref<{ visible: boolean; item: ItemPublic | null }>({ visible: false, item: null })
+const showDelete = ref<{ visible: boolean; item: ItemPublic | null }>({
+  visible: false,
+  item: null,
+})
 
 const queryClient = useQueryClient()
 
@@ -30,7 +34,6 @@ const { data: itemsResponse, isLoading } = useQuery<ItemsReadItemsResponse>({
     }),
 })
 
-
 // Zmapowana lista itemów (tylko data[])
 const items = computed(() => itemsResponse.value?.data ?? [])
 
@@ -41,17 +44,17 @@ const totalPages = computed(() => Math.max(1, Math.ceil(total.value / size.value
 // Mutacje
 const addMutation = useMutation({
   mutationFn: (payload: ItemsCreateItemData) => ItemsService.createItem(payload),
-  onSuccess: () => queryClient.invalidateQueries(['items']),
+  onSuccess: () => queryClient.invalidateQueries({ queryKey: ['items'] }),
 })
 
 const editMutation = useMutation({
   mutationFn: (payload: ItemsUpdateItemData) => ItemsService.updateItem(payload),
-  onSuccess: () => queryClient.invalidateQueries(['items']),
+  onSuccess: () => queryClient.invalidateQueries({ queryKey: ['items'] }),
 })
 
 const deleteMutation = useMutation({
   mutationFn: (payload: ItemsDeleteItemData) => ItemsService.deleteItem(payload),
-  onSuccess: () => queryClient.invalidateQueries(['items']),
+  onSuccess: () => queryClient.invalidateQueries({ queryKey: ['items'] }),
 })
 
 // Formularz lokalny
@@ -62,12 +65,12 @@ function openAdd() {
   showAdd.value = true
 }
 
-function openEdit(item: any) {
+function openEdit(item: ItemPublic) {
   form.value = { title: item.title, description: item.description ?? '' }
   showEdit.value = { visible: true, item }
 }
 
-function openDelete(item: any) {
+function openDelete(item: ItemPublic) {
   showDelete.value = { visible: true, item }
 }
 

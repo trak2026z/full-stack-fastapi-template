@@ -2,8 +2,10 @@
 import { ref } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { useMutation } from '@tanstack/vue-query'
-import { UsersService } from '@/client'
+import { LoginService } from '@/client'
 import { handleApiError } from '@/services/api'
+
+import type { Message } from '@/client'
 
 const route = useRoute()
 const router = useRouter()
@@ -13,9 +15,9 @@ const confirmPassword = ref('')
 const errorMessage = ref('')
 const successMessage = ref('')
 
-const resetMutation = useMutation<void, unknown, { token: string; new_password: string }>({
+const resetMutation = useMutation<Message, unknown, { token: string; new_password: string }>({
   mutationFn: ({ token, new_password }) =>
-    UsersService.resetPassword({
+    LoginService.resetPassword({
       requestBody: {
         token,
         new_password,
@@ -97,7 +99,7 @@ function onSubmit() {
         <button
           type="submit"
           class="w-full bg-green-600 text-white py-2 px-4 rounded-md hover:bg-green-700 disabled:opacity-50"
-          :disabled="resetMutation.isPending"
+          :disabled="resetMutation.isPending.value"
         >
           <span v-if="resetMutation.isPending">Resetting...</span>
           <span v-else>Reset Password</span>

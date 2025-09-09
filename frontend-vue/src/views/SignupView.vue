@@ -112,14 +112,14 @@ function onSubmit() {
           type="submit"
           class="w-full bg-green-600 text-white py-2 px-4 rounded-md hover:bg-green-700 disabled:opacity-50"
           :disabled="
-            signupMutation.isLoading ||
+            signupMutation.isPending.value ||
             !fullName ||
             !email ||
             !password ||
             password !== confirmPassword
           "
         >
-          <span v-if="signupMutation.isLoading">Signing up...</span>
+          <span v-if="signupMutation.isPending.value">Signing up...</span>
           <span v-else>Sign Up</span>
         </button>
       </form>

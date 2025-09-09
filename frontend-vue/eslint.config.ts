@@ -24,5 +24,23 @@ export default defineConfigWithVueTs(
     ...pluginVitest.configs.recommended,
     files: ['src/**/__tests__/*'],
   },
+
+    {
+    //Wyłączanie reguł tylko w `src/client`
+    files: ['src/client/**/*.{ts,js}'],
+    rules: {
+      '@typescript-eslint/no-explicit-any': 'off',
+      '@typescript-eslint/no-unused-vars': 'off',
+      '@typescript-eslint/ban-ts-comment': 'off',
+    },
+  },
+
+  {
+  files: ['src/components/Sidebar.vue'],
+  rules: {
+    'vue/multi-word-component-names': 'off',
+  },
+},
+
   skipFormatting,
 )
