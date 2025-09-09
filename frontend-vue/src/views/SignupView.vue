@@ -58,7 +58,7 @@ function onSubmit() {
       <!-- Form -->
       <form @submit.prevent="onSubmit" class="space-y-4">
         <div>
-          <label class="block text-sm font-medium text-gray-700">Full Name</label>
+          <label class="block text-sm font-medium text-gray-900">Full Name</label>
           <input
             v-model="fullName"
             type="text"
@@ -68,7 +68,7 @@ function onSubmit() {
         </div>
 
         <div>
-          <label class="block text-sm font-medium text-gray-700">Email</label>
+          <label class="block text-sm font-medium text-gray-900">Email</label>
           <input
             v-model="email"
             type="email"

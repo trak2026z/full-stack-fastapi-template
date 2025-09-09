@@ -34,20 +34,50 @@
   --color-text: var(--vt-c-text-light-1);
 
   --section-gap: 160px;
+
+  /* Formularze – domyślne (light) */
+  --input-bg: #ffffff;
+  --input-text: #111827; /* text-gray-900 */
+  --input-placeholder: #6b7280; /* text-gray-500 */
+  --input-border: #d1d5db; /* gray-300 */
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --color-background: var(--vt-c-black);
-    --color-background-soft: var(--vt-c-black-soft);
-    --color-background-mute: var(--vt-c-black-mute);
+/* DARK MODE (manual override) */
+:root[data-theme='dark'] {
+  --color-background: var(--vt-c-black);
+  --color-background-soft: var(--vt-c-black-soft);
+  --color-background-mute: var(--vt-c-black-mute);
 
-    --color-border: var(--vt-c-divider-dark-2);
-    --color-border-hover: var(--vt-c-divider-dark-1);
+  --color-border: var(--vt-c-divider-dark-2);
+  --color-border-hover: var(--vt-c-divider-dark-1);
 
-    --color-heading: var(--vt-c-text-dark-1);
-    --color-text: var(--vt-c-text-dark-2);
-  }
+  --color-heading: var(--vt-c-text-dark-1);
+  --color-text: var(--vt-c-text-dark-1);
+
+  /* Formularze */
+  --input-bg: #1f2937; /* gray-800 */
+  --input-text: #f9fafb; /* gray-50 */
+  --input-placeholder: #9ca3af; /* gray-400 */
+  --input-border: #374151; /* gray-700 */
+}
+
+/* LIGHT MODE (manual override) */
+:root[data-theme='light'] {
+  --color-background: var(--vt-c-white);
+  --color-background-soft: var(--vt-c-white-soft);
+  --color-background-mute: var(--vt-c-white-mute);
+
+  --color-border: var(--vt-c-divider-light-2);
+  --color-border-hover: var(--vt-c-divider-light-1);
+
+  --color-heading: var(--vt-c-text-light-1);
+  --color-text: var(--vt-c-text-light-1);
+
+  /* Formularze */
+  --input-bg: #ffffff;
+  --input-text: #111827;
+  --input-placeholder: #6b7280;
+  --input-border: #d1d5db;
 }
 
 *,
@@ -83,4 +113,18 @@ body {
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+/* Globalne style formularzy */
+input,
+textarea,
+select {
+  background-color: var(--input-bg);
+  color: var(--input-text);
+  border: 1px solid var(--input-border);
+}
+
+input::placeholder,
+textarea::placeholder {
+  color: var(--input-placeholder);
 }

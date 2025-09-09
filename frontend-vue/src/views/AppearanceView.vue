@@ -50,15 +50,26 @@ watch(
 :root[data-theme='dark'] {
   --bg-color: #111827;
   --text-color: #f9fafb;
+  --input-bg: #1f2937;
+  --input-text: #f9fafb;
+  --input-placeholder: #9ca3af;
+  --input-border: #374151;
 }
 
 :root[data-theme='light'] {
   --bg-color: #ffffff;
   --text-color: #111827;
+  --input-bg: #ffffff;
+  --input-text: #111827;
+  --input-placeholder: #6b7280;
+  --input-border: #d1d5db;
 }
+
 
 body {
   background-color: var(--bg-color);
   color: var(--text-color);
 }
+
+
 </style>

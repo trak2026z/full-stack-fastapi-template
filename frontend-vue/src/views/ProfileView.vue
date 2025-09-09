@@ -119,7 +119,7 @@ function onDeleteAccount() {
           <p><strong>Full name:</strong> {{ user?.full_name }}</p>
           <p><strong>Email:</strong> {{ user?.email }}</p>
           <button
-            class="mt-4 px-4 py-2 bg-green-600 text-white rounded-md"
+            class="mt-4 px-4 py-2 bg-green-600 text-black rounded-md"
             @click="
               () => {
                 form.full_name = user?.full_name || ''

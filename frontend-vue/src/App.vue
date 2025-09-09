@@ -6,7 +6,7 @@ import Sidebar from '@/components/Sidebar.vue'
 const route = useRoute()
 
 // Ścieżki bez sidebaru i headera (auth layout)
-const authRoutes = ['/login', '/signup', '/recover-password', '/reset-password']
+const authRoutes = ['/login', '/signup']
 
 function isAuthPage() {
   return authRoutes.includes(route.path)

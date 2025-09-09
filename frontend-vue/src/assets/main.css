@@ -33,3 +33,18 @@ a,
     padding: 0 2rem;
   }
 }
+
+/* Globalne style formularzy, działają z data-theme */
+input,
+textarea,
+select {
+  background-color: var(--input-bg);
+  color: var(--input-text);
+  border: 1px solid var(--input-border, #d1d5db);
+}
+
+input::placeholder,
+textarea::placeholder {
+  color: var(--input-placeholder, #9ca3af);
+}
+

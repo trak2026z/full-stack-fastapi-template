@@ -56,12 +56,6 @@ function onSubmit() {
           />
         </div>
 
-        <!-- Forgot Password -->
-        <div class="flex justify-end">
-          <router-link to="/recover-password" class="text-sm text-green-600 hover:underline">
-            Forgot Password?
-          </router-link>
-        </div>
 
         <!-- Error message -->
         <p v-if="error" class="text-red-600 text-sm">Login failed. Please try again.</p>
